@@ -1,0 +1,30 @@
+{
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "@dotenvx/dotenvx": "^1.64.0",
+    "@libsql/client": "^0.17.3",
+    "@prisma/client": "^5.22.0",
+    "africastalking": "^0.7.9",
+    "bcrypt": "^6.0.0",
+    "cloudinary": "^1.41.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-validator": "^7.3.2",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.1.1",
+    "multer-storage-cloudinary": "^4.0.0",
+    "node-cron": "^4.2.1",
+    "prisma": "^5.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "nodemon": "^3.1.14"
+  },
+  "prisma": {
+  "seed": "node prisma/seed.js"
+}
+
+}

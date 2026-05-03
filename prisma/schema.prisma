@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Service {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  price       Float
+  duration    Int
+  category    String
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  bookings    Booking[]
+}
+
+model Booking {
+  id                Int      @id @default(autoincrement())
+  customerName      String
+  customerPhone     String
+  customerEmail     String?
+  serviceId         Int
+  service           Service  @relation(fields: [serviceId], references: [id])
+  appointmentDate   DateTime
+  durationMinutes   Int
+  status            String   @default("PENDING")
+  notes             String?
+  paymentMethod     String   @default("CASH")
+  paymentScreenshot String?
+  paymentStatus     String   @default("UNPAID")
+  confirmationSent  Boolean  @default(false)
+  reminderSent      Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model GalleryPhoto {
+  id        Int      @id @default(autoincrement())
+  imageUrl  String
+  publicId  String
+  caption   String?
+  category  String
+  isVisible Boolean  @default(true)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model Review {
+  id           Int      @id @default(autoincrement())
+  customerName String
+  feedback     String
+  rating       Int
+  status       String   @default("PENDING")
+  createdAt    DateTime @default(now())
+}
+
+model BusinessHours {
+  id        Int     @id @default(autoincrement())
+  dayOfWeek Int
+  openTime  String
+  closeTime String
+  isClosed  Boolean @default(false)
+}
+
+model BlockedSlot {
+  id        Int      @id @default(autoincrement())
+  startTime DateTime
+  endTime   DateTime
+  reason    String?
+  createdAt DateTime @default(now())
+}
+
+model Admin {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  passwordHash String
+  name         String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  phone     String?
+  email     String?
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
