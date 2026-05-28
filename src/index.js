@@ -34,9 +34,8 @@ app.use("/api/hours",     hoursRoutes);
 app.use(cors({
   origin: [
     "http://localhost:3000",
-    process.env.CLIENT_URL,
-  ].filter(Boolean),
-  credentials: true,
+    "https://choiceesalon.vercel.app",
+  ],
 }));
 
 // ── Health check ────────────────────────────────────────
