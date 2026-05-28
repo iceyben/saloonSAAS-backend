@@ -31,6 +31,14 @@ app.use("/api/analytics", analyticsRoutes);
 app.use("/api/contact",   contactRoutes);
 app.use("/api/hours",     hoursRoutes);
 
+app.use(cors({
+  origin: [
+    "http://localhost:3000",
+    process.env.CLIENT_URL,
+  ].filter(Boolean),
+  credentials: true,
+}));
+
 // ── Health check ────────────────────────────────────────
 app.get("/api/health", (_, res) => res.json({ status: "ok" }));
 
